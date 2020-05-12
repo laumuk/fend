@@ -5,6 +5,7 @@ const path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
 const aylien = require('aylien_textapi')
+const bodyParser = require('body-parser')
 
 const textapi = new aylien({
     application_id: `${process.env.API_ID}`,
@@ -12,6 +13,9 @@ const textapi = new aylien({
 });
 
 const app = express()
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json()),
 
 app.use(express.static('dist'))
 
