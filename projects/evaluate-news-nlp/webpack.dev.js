@@ -9,6 +9,11 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
