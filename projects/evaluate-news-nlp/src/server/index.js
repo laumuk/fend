@@ -35,3 +35,15 @@ app.listen(8081, function () {
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
+
+app.get('/article', function (req, res) {
+    textapi.sentiment({
+            "url": req.query.url,
+            "mode": "document"
+        }, function(error, response) {
+            console.log(error)
+            console.log(response)
+            res.send(response)
+        }
+    )
+})
