@@ -3,7 +3,10 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    Client.checkForName(formText)
+    if (!validURL(formText)) {
+        alert("Please enter valid URL.")
+        return false
+    }
 
     console.log("::: Form Submitted :::")
     fetch(
@@ -15,18 +18,13 @@ function handleSubmit(event) {
         document.getElementById('subjectivity').innerHTML = res.subjectivity
         document.getElementById('text').innerHTML = res.text
         document.getElementById('polarity_confidence').innerHTML = res.polarity_confidence
-        document.getElementById('subjectivity-confidence').innerHTML = res.subjectivity-confidence
+        document.getElementById('subjectivity_confidence').innerHTML = res.subjectivity_confidence
     })
 }
 
 function validURL(str) {
-    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-    if(!regex .test(str)) {
-      alert("Please enter valid URL.");
-      return false;
-    } else {
-      return true;
-    }
-  }
+    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
+    return regex.test(str)
+}
 
 export { handleSubmit, validURL }
